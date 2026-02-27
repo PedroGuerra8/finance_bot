@@ -15,9 +15,14 @@ def registrar_entrada(db: Session, valor: float, descricao: str | None):
     return calcular_saldo(db)
 
 
-def registrar_alimentacao(db: Session, valor: float, descricao: str | None):
+def registrar_saida(
+    db: Session,
+    valor: float,
+    categoria: str,
+    descricao: str | None
+):
     transacao = Transacao(
-        tipo="alimentacao",
+        tipo=categoria,
         valor=valor,
         descricao=descricao
     )

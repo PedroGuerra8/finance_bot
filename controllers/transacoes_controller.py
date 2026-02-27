@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from dependencies import get_db
 from services.transacoes_service import (
     registrar_entrada,
-    registrar_alimentacao,
+    registrar_saida,
     calcular_saldo
 )
 
@@ -29,7 +29,7 @@ def processar_mensagem(
         partes = mensagem.split()
         valor = float(partes[1])
         descricao = " ".join(partes[2:]) if len(partes) > 2 else None
-        saldo = registrar_alimentacao(db, valor, descricao)
+        saldo = registrar_saida(db, valor, descricao)
         return {"saldo": saldo}
 
     if mensagem.startswith("saldo"):
